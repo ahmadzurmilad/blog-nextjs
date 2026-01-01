@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/client";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { format } from "date-fns";
+import { id as idLocale } from "date-fns/locale";
 
 type PageProps = {
     params: {
@@ -15,7 +17,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     const { data: page } = await supabase
         .from("pages")
-        .select("title")
+        .select("title, content, updated_at")
         .eq("slug", slug)
         .eq("status", "published")
         .single();
@@ -36,7 +38,7 @@ export default async function PageDetailPage({ params }: PageProps) {
     const { slug } = await params;
     const supabase = createClient();
 
-    const { data: page, error } = await supabase.from("pages").select("title, content").eq("slug", slug).eq("status", "published").single();
+    const { data: page, error } = await supabase.from("pages").select("title, content, updated_at").eq("slug", slug).eq("status", "published").single();
 
     if (error || !page) {
         notFound();
