@@ -26,8 +26,8 @@ export async function updateSession(request: NextRequest) {
     } = await supabase.auth.getUser();
 
     // Definisikan rute dan peran yang diizinkan
-    const adminOnlyRoutes = ["/users", "/post", "/admin/pages", "users"];
-    const protectedRoutes = ["/protected", "/dashboard", "/profiles", ...adminOnlyRoutes];
+    const adminOnlyRoutes = ["/admin/articles", "/admin/pages"];
+    const protectedRoutes = ["/admin", "/profiles", ...adminOnlyRoutes];
     const authRoutes = ["/auth/login", "/forgot-password"];
     const isProtectedRoute = protectedRoutes.some((route) => request.nextUrl.pathname.startsWith(route));
     const isAuthRoute = authRoutes.some((route) => request.nextUrl.pathname.startsWith(route));
@@ -44,7 +44,7 @@ export async function updateSession(request: NextRequest) {
         const userRole = user.app_metadata?.role;
         if (userRole !== 'admin') {
             // Alihkan ke halaman dashboard utama jika bukan admin
-            return NextResponse.redirect(new URL("/dashboard", request.url));
+            return NextResponse.redirect(new URL("/admin", request.url));
         }
     }
 
