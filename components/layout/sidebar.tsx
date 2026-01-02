@@ -10,27 +10,27 @@ import { useAuth } from '@/hooks/use-auth'
 const sidebarItems = [
     {
         title: 'Dashboard',
-        href: '/protected',
+        href: '/admin',
         icon: LayoutDashboard,
     },
     {
         title: 'Articles',
-        href: '/protected/admin/articles',
+        href: '/admin/articles',
         icon: FileText,
     },
     {
         title: 'Pages',
-        href: '/protected/admin/pages',
+        href: '/admin/pages',
         icon: Layers,
     },
     {
         title: 'Categories',
-        href: '/protected/admin/categories',
+        href: '/admin/categories',
         icon: FolderTree,
     },
     {
         title: 'Profile',
-        href: '/protected/admin/profiles',
+        href: '/admin/profiles',
         icon: User,
     },
 ]
@@ -52,7 +52,7 @@ export function Sidebar({ className, onNavigate }: SidebarProps) {
     return (
         <div className={cn("flex h-full w-64 flex-col border-r bg-background", className)}>
             <div className="flex h-14 items-center border-b px-6 font-semibold">
-                Admin Panel
+                Bonextjs
             </div>
             <div className="flex-1 overflow-auto py-4">
                 <nav className="grid items-start px-4 text-sm font-medium">
