@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { LayoutDashboard, FileText, Layers, User, LogOut } from 'lucide-react'
+import { LayoutDashboard, FileText, Layers, User, LogOut, FolderTree } from 'lucide-react'
 import { useAuth } from '@/hooks/use-auth'
 
 const sidebarItems = [
@@ -22,6 +22,11 @@ const sidebarItems = [
         title: 'Pages',
         href: '/protected/admin/pages',
         icon: Layers,
+    },
+    {
+        title: 'Categories',
+        href: '/protected/admin/categories',
+        icon: FolderTree,
     },
     {
         title: 'Profile',
