@@ -3,7 +3,7 @@
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
-
+import { useAuth } from '@/hooks/use-auth'
 export function LogoutButton() {
   const router = useRouter()
   const { signOut } = useAuth()

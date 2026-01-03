@@ -42,12 +42,20 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
 export function Sidebar({ className, onNavigate }: SidebarProps) {
     const pathname = usePathname()
     const router = useRouter()
-    const { signOut } = useAuth()
+    const { user, signOut } = useAuth()
 
     const handleLogout = async () => {
         await signOut()
         router.push('/auth/login')
     }
+
+    const filteredSidebarItems = sidebarItems.filter((item) => {
+        const restrictedRoutes = ['/admin/articles', '/admin/pages', '/admin/categories']
+        if (restrictedRoutes.includes(item.href)) {
+            return user?.app_metadata?.role === 'admin'
+        }
+        return true
+    })
 
     return (
         <div className={cn("flex h-full w-64 flex-col border-r bg-background", className)}>
@@ -56,7 +64,7 @@ export function Sidebar({ className, onNavigate }: SidebarProps) {
             </div>
             <div className="flex-1 overflow-auto py-4">
                 <nav className="grid items-start px-4 text-sm font-medium">
-                    {sidebarItems.map((item) => (
+                    {filteredSidebarItems.map((item) => (
                         <Link
                             key={item.href}
                             href={item.href}
